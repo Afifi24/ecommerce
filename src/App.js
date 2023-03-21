@@ -1,5 +1,6 @@
 import Nav from "./component/Nav";
 import Products from "./component/products/Products";
+import Checkout from "./component/Checkout";
 import {Routes,Route} from 'react-router-dom'
 import Stores from "./component/Stores";
 import mack from './images/mack.jpg'
@@ -11,6 +12,7 @@ import watch from './images/watch.jpg'
 import book from './images/book.jpg'
 import bag from './images/bag.jpg'
 import { useState } from "react";
+
 const products = [
   {id:1,name:'Macbook', description:'Running shoes.',price: 45.13,amount:1, image:mack},
   {id:2,name:'Lamp', description:'apple macbook.', price: 80.00,amount:1, image:Lamp},
@@ -20,7 +22,6 @@ const products = [
   {id:6,name:'book', description:'apple macbook.', price: 66.34,amount:1, image:book},
   {id:7,name:'watch', description:'apple macwatch.', price: 12.03,amount:1, image:watch},
   {id:8,name:'bag', description:'apple macbag.', price: 40.56, amount:1, image:bag},
-  
 ]
 function App() {
   const [storesitem,setStoreitem] = useState([])
@@ -37,7 +38,6 @@ function App() {
     setCounter(counter + 1)
      setStoreitem([...storesitem,item])
     }
-   
   }
     // !delete
   const Delete = (item)=>{
@@ -50,13 +50,24 @@ function App() {
        item.amount +=1
        setStoreitem([...storesitem])    
    }
-
+  // todo: increase the amount
+  const DecreaseAmount = (item)=>{
+    item.amount -=1;
+    setStoreitem([...storesitem])
+    if(item.amount===0){
+      const hide = storesitem.filter(hid=>hid.id!==item.id)
+      setStoreitem(hide)
+    // setStoreitem([...storesitem])
+    setCounter(counter-1)
+    }
+  }
   return (
     <div className="pt-20">
       <Nav counter={counter}/>
       <Routes>
            <Route path="/" element={   <Products AddtoCart={AddtoCart} products={products}/>}/>
-           <Route path="/store" element={<Stores IncreaseAmount={IncreaseAmount} Delete={Delete} storesitem={storesitem}/>}/>
+           <Route path="/store" element={<Stores counter={counter} setCounter={setCounter} setStoreitem={setStoreitem} IncreaseAmount={IncreaseAmount} Delete={Delete} storesitem={storesitem} DecreaseAmount={DecreaseAmount} />}/>
+           <Route exact path="/checkout" element={<Checkout/>}/>
       </Routes>
     </div>
   );

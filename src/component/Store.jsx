@@ -1,7 +1,8 @@
 import React,{useState} from 'react'
 import kittle from '../images/kittle.jpg'
-const Store = ({stor,Delete,IncreaseAmount}) => {
-  const [Amount,setAmount]= useState(stor.amount)
+import { Link } from 'react-router-dom'
+const Store = ({stor,Delete,IncreaseAmount,DecreaseAmount,counter}) => {
+const [Amount,setAmount]= useState(stor.amount)
 
   return (
     <div className='p-4 md:px-20 mx-auto'>
@@ -15,7 +16,7 @@ const Store = ({stor,Delete,IncreaseAmount}) => {
             <h2>${stor.price}</h2>
           </div>
           <div className='flex gap-4 justify-center items-center'>
-                <button className='px-4 py-1 hover:bg-gray-200  '>-</button>
+                <button onClick={()=>DecreaseAmount(stor)} className='px-4 py-1 hover:bg-gray-200  '>-</button>
                 <button className='px-4 py-1  '>{stor.amount}</button>
                 <button onClick={()=>IncreaseAmount(stor)} className='px-4 py-1 hover:bg-gray-200  '>+</button>
                 <button onClick={()=>Delete(stor)} className='px-4 py-1  bg-red-500 text-white uppercase rounded-md'>remove</button>
@@ -23,6 +24,9 @@ const Store = ({stor,Delete,IncreaseAmount}) => {
         
           </div>
        </div>
+            <div className='pt-6 text-md md:text-lg font-semibold'>
+                 <h2>subtotal: ${stor.amount*stor.price}</h2>
+              </div>
        </div>
     </div>
   )
