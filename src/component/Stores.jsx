@@ -23,9 +23,9 @@ const Stores = ({storesitem,Delete,IncreaseAmount,DecreaseAmount,setStoreitem,se
     {/* <Store/> */}
 </div>
      { counter!==0?
-     <div className='flex flex-col items-center justify-between  md:flex-row '>
-      <div>
-        <h2 className='font-bold text-red-500 md:text-xl'>Total: <small className='px-4 py-1 bg-red-500 text-white'>$ {Math.floor(storesitem.reduce((acc,item)=>acc+=item.amount*item.price,0))}</small></h2>
+     <div className=' flex flex-col md:items-center md:justify-between  md:flex-row '>
+      <div className='mt-10'>
+        <h2 className='font-bold text-red-500 md:text-xl'>Total: <small className='px-4 py-1 bg-red-500 text-white'>$ {storesitem.reduce((acc,item)=>acc+=item.amount*item.price,0).toFixed(2)}</small></h2>
         
       </div>
      <div className='flex flex-col gap-6 md:flex-row mt-10 mb-6 justify-end'>

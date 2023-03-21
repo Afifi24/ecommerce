@@ -25,7 +25,7 @@ const [Amount,setAmount]= useState(stor.amount)
           </div>
        </div>
             <div className='pt-6 text-md md:text-lg font-semibold'>
-                 <h2>subtotal: ${stor.amount*stor.price}</h2>
+                 <h2>subtotal: $ {(stor.amount*stor.price).toFixed(2)}</h2>
               </div>
        </div>
     </div>
